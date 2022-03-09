@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# If this script runs on MacOS set RUNS_ON_MACOS variable to TRUE
+
 if [ -d virtual-environments ]; then
     (cd virtual-environments && git pull --ff-only)
 else
@@ -20,7 +22,14 @@ export AWS_POLL_DELAY_SECONDS=10
 
 mkdir -p "$BUILD_DIRECTORY"
 rsync -aP --delete "${TEMPLATE_DIRECTORY}/" "${BUILD_DIRECTORY}/"
-sed '/waagent/ d' -i "${BUILD_DIRECTORY}/scripts/installers/configure-environment.sh"
+
+# Remove Azure VM Agent, use different command when executing on MacOS
+if [[ $RUNS_ON_MACOS == 'TRUE' ]]; then
+    echo "Runs on MacOS"
+    ex '+g/waagent/d' -cwq "${BUILD_DIRECTORY}/scripts/installers/configure-environment.sh"
+else
+    sed '/waagent/ d' -i "${BUILD_DIRECTORY}/scripts/installers/configure-environment.sh"
+fi
 
 jq . < "$UPSTREAM_TEMPLATE" |
     jq --argjson builder "$(< "$BUILDER_FILE")" --argjson variables "$(< "$VARIABLES_FILE")" '. | .builders = [$builder] | .variables = $variables' |
