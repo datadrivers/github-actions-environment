@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-if [[ "$#" -ne 1 ]]; then
-    echo "Expected argument of AWS_PROFILE"
-    exit 1
-fi
-
-AWS_PROFILE="$1"
-export AWS_PROFILE
-
 if [ -d virtual-environments ]; then
     (cd virtual-environments && git pull --ff-only)
 else
