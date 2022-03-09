@@ -33,7 +33,7 @@ fi
 
 jq . < "$UPSTREAM_TEMPLATE" |
     jq --argjson builder "$(< "$BUILDER_FILE")" --argjson variables "$(< "$VARIABLES_FILE")" '. | .builders = [$builder] | .variables = $variables' |
-    jq '. | del(."sensitive-variables") | del(.provisioners | last)' > "${BUILD_DIRECTORY}/packer-template.tmp.json"
+    jq '. | del(."sensitive-variables") | del(.provisioners | last)' | jq '. += {"post-processors" : [{"type": "manifest", "output": "manifest.json"}]}' > "${BUILD_DIRECTORY}/packer-template.tmp.json"
 
 (
     cd "$BUILD_DIRECTORY" || exit 1
