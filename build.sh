@@ -16,13 +16,13 @@ fi
 
 BUILD_DIRECTORY="./build"
 TEMPLATE_DIRECTORY="./virtual-environments/images/linux"
-UPSTREAM_TEMPLATE="${TEMPLATE_DIRECTORY}/ubuntu1804.json"
+UPSTREAM_TEMPLATE="${TEMPLATE_DIRECTORY}/ubuntu2004.json"
 BUILDER_FILE="./builder-definition.json"
 VARIABLES_FILE="./variables.json"
 
 
 # AWS_MAX_ATTEMPTS defaults to 40; we need to wait much longer for the huge image we build.
-export AWS_MAX_ATTEMPTS=400
+export AWS_MAX_ATTEMPTS=800
 # AWS_POLL_DELAY_SECONDS defaults to 2 to 5 seconds, depending on task. Set to 10s for very long wait times for image to be ready
 export AWS_POLL_DELAY_SECONDS=10
 

@@ -12,7 +12,7 @@
   },
   "subnet_filter": {
     "filters": {
-      "tag:PackerBuild": "true"
+      "tag:SubnetType": "Utility"
     },
     "random": true
   },

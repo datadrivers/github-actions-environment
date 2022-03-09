@@ -6,11 +6,11 @@
   "vm_size": "c5.large",
   "capture_name_prefix": "packer",
   "image_version": "dev",
-  "image_os": "ubuntu18",
+  "image_os": "ubuntu20",
   "run_validation_diskspace": "false",
-  "ubuntu_version": "18.04",
-  "ubuntu_codename": "bionic",
+  "ubuntu_version": "20.04",
+  "ubuntu_codename": "focal",
   "aws_region": "eu-central-1",
   "base_image_account": "099720109477",
-  "owner_name": "smartlyio"
+  "owner_name": "datadrivers"
 }
