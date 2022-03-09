@@ -27,5 +27,12 @@
   "associate_public_ip_address": true,
   "instance_type": "{{user `vm_size`}}",
   "ssh_username": "ubuntu",
-  "ami_name": "{{user `owner_name`}}/github-actions-runner/ubuntu-{{user `ubuntu_version`}}-{{timestamp}}"
+  "ami_name": "{{user `owner_name`}}/github-actions-runner/ubuntu-{{user `ubuntu_version`}}-{{timestamp}}",
+  "tags": [
+    {
+      "Base_AMI_Name": "{{ .SourceAMIName }}",
+      "Base_AMI_ID": "{{ .SourceAMI }}",
+      "AMI_Creator": "Packer"
+    }
+  ]
 }
